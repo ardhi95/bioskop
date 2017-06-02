@@ -23,42 +23,19 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?=base_url()?>Assets/Admin/index2.html"><b>SI.</b>Bioskop</a>
+    <h2><b>Movie</b> Station</h2>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in untuk Mengenali Akun Anda</p>
 
-    <?=form_open('Manager/SignIn',array('id'=>'login','method'=>'post'))?>
-      <div class="form-group has-feedback">
-        <input type="password" id="authID" name="authID" class="form-control" placeholder="ID Autentifikasi">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-            <input type="checkbox" id="show" onchange="document.getElementById('authID').type = this.checked ? 'text' : 'password'" >
-            <label for="show">Tampilkan ID Anda</label>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    <?=form_close()?>
-
     <div class="social-auth-links text-center">
-      <p>- Lebih Mudah Dengan -</p>
-      <a href="http://localhost/bioskop/Twitter/redirect" class="btn btn-block btn-social btn-twitter btn-flat"><i class="fa fa-twitter" aria-hidden="true"></i>
-
- Sign in using
-        Twitter</a>
       <a href="<?=$authUrl?>" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
         Google+</a>
     </div>
     <!-- /.social-auth-links -->
     <?=$this->session->flashdata('gagal').'<br>';?>
-    <a href="">Kami Sarankan untuk masuk dengan akun google bila anda adalah user baru.</a><br>
+    <p><center>Kami Sarankan untuk masuk dengan akun google bila anda adalah user baru.</center></p><br>
 
   </div>
   <!-- /.login-box-body -->

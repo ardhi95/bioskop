@@ -107,7 +107,7 @@ class Movie extends CI_Controller
 
 		$where = array('id_bioskop' => $kode_bioskop);
 		
-		$data['jam'] = $this->M_movie->edit_data($where,'jam_pemutaran');
+		$data['jam'] = $this->M_movie->edit_dataJam($where,'jam_pemutaran');
 		$this->load->view('Manager/JamTayang',$data);
 	}
 

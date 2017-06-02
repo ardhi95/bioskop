@@ -69,9 +69,6 @@ class Manager extends CI_Controller
 
     }
 
-    public function admin(){
-        $this->load->view('Manager/welcomeadmin');
-    }
 
     public function tambah_movie(){
 
@@ -79,6 +76,7 @@ class Manager extends CI_Controller
 
         $data['id_bioskop']= $kode_bioskop;
         $kondisi = array('id_bioskop' => $kode_bioskop);
+        $data['jadwal'] = $this->M_movie->edit_dataJam($kondisi,'jam_pemutaran');
         $data['film'] = $this->M_movie->getFilm('');
         $data['Kode'] = $this->CGenerate();
         $data['movie_list'] = $this->M_movie->get_movie($kode_bioskop);
@@ -95,35 +93,25 @@ class Manager extends CI_Controller
      return $kode;
     }
 
+    public function profil()
+    {
+            $id = $this->session->userdata('kd_Manager');
+            $data['code'] = "BS".rand(1, 1000);
+            $data['HStep'] = $this->CekStep();
+            $data['PgB'] = 100-(33.3*$this->CekStep());
+            $where = array('oauth_uid' => $this->session->userdata('id'));
+            $data['Man'] = $this->M_movie->edit_dataManager($id);
+            $this->load->view('Manager/startup',$data);
+    }
 
     public function Transaksi(){
-         $get['data'] = $this->M_TSaldo->transaksi_list();
-         $this->load->view('Manager/transaksisaldo',$get);
+        $id = $this->session->userdata('kd_Manager');
+        $get['sal'] = $this->M_TSaldo->getSaldo($id);
+        $get['data'] = $this->M_TSaldo->transaksi_list();
+        $this->load->view('Manager/transaksisaldo',$get);
     }
 
-    public function PTransaksi(){
-        $get['data'] = $this->M_TSaldo->transaksi_Pending();
-        $this->load->view('Manager/transaksisaldopending',$get);   
-    }
-
-    public function UpdateTransaksi(){
-        $id_trans = $this->uri->segment(3);
-        $update = array('id_withdrawal'=>$id_trans,
-                    'status'=>1);
-
-        $this->db->trans_start();
-        $this->db->update('transaksi_withdrawal',$update,array('id_withdrawal'=>$id_trans));
-        $this->db->trans_complete();
-
-        if ($this->db->trans_status() === FALSE) {
-            echo $this->session->set_flashdata('gagal', 'gagal');
-           } else {
-            echo $this->session->set_flashdata('oke', 'oke');
-           }
-
-        redirect('Manager/PTransaksi');
-
-    }
+    
 
     public function logout() {
         $this->session->unset_userdata('token');
@@ -149,19 +137,16 @@ class Manager extends CI_Controller
             $a['list'] = $this->M_TSaldo->ReportAll($manajer);
         }
 
-        $hari = array('WEEKOFYEAR(tgl_beli)' => date('Y-m-d'),'id_bioskop' => $kode_bioskop);
-        $minggu = array('WEEKOFYEAR(tgl_beli)' => $this->M_other->MN(),'id_bioskop' => $kode_bioskop);
+        $hari = array('DATE(tgl_beli)' => date('Y-m-d'),'id_bioskop' => $kode_bioskop);
         $bulan = array('MONTH(tgl_beli)' => (int)date('m'),'id_bioskop' => $kode_bioskop);
         $tahun = array('YEAR(tgl_beli)' => (int)date('Y'),'id_bioskop' => $kode_bioskop);
 
         $har = $this->M_TSaldo->SUM('pembelian_tiket',$hari,'jml_uang');
-        $min = $this->M_TSaldo->SUM('pembelian_tiket',$minggu,'jml_uang');
         $bul = $this->M_TSaldo->SUM('pembelian_tiket',$bulan,'jml_uang');
         $year= $this->M_TSaldo->SUM('pembelian_tiket',$tahun,'jml_uang');
 
 
         $a['P_Hari'] = number_format($har,2,',','.');
-        $a['P_Minggu'] = number_format($min,2,',','.');
         $a['P_Bulan'] = number_format($bul,2,',','.');
         $a['P_Tahun'] = number_format($year,2,',','.');
         
@@ -201,6 +186,7 @@ class Manager extends CI_Controller
     public function Welcome(){
         $where = array('id_manager' => $this->session->userdata('kd_Manager'));
         $jumlah = $this->M_other->count_return_row('bioskop',$where);
+        $id = $this->session->userdata('kd_Manager');
 
         if ($jumlah > 0) {
             $this->load->view('Manager/welcomemenejer');
@@ -209,7 +195,7 @@ class Manager extends CI_Controller
             $data['HStep'] = $this->CekStep();
             $data['PgB'] = 100-(33.3*$this->CekStep());
             $where = array('oauth_uid' => $this->session->userdata('id'));
-            $data['Man'] = $this->M_movie->edit_data($where,'manager_register')->result();
+            $data['Man'] = $this->M_movie->edit_dataManager($id);
             $this->load->view('Manager/startup',$data);
         }
     }
@@ -226,4 +212,34 @@ class Manager extends CI_Controller
 
         return $step;
     }
+
+    public function withdraw()
+    {
+        $id = $this->session->userdata('kd_Manager');
+        $saldom = $this->M_TSaldo->getSaldo($id)->row();
+        if (is_object($saldom)) {
+
+            $tgl = date('Y-m-d');
+            $waktu = date('h-i-s');
+            $status = '0';
+            $admin = "admin";
+            $id = $this->session->userdata('kd_Manager');
+            $data = array(
+                'id_withdrawal' => '',
+                'tanggal'       => $tgl,
+                'waktu'         => $waktu,
+                'id_manager'    => $id,
+                'id_admin'      => $admin,
+                'jumlah'        => $saldom->saldo,
+                'no_transfer'   => '0',
+                'status'        => $status
+                );
+
+        $this->db->insert('transaksi_withdrawal', $data);
+        redirect('Manager/Transaksi');
+        }
+        
+
+    }
+
 }

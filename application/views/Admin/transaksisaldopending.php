@@ -22,12 +22,13 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=base_url()?>Assets/Admin/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-<?php $this->load->view('Manager/header') ?>
-  <?php $this->load->view('Manager/sidebar') ?>
+   <?php $this->load->view('Admin/header') ?>
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,48 +47,11 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      <div class="col-md-3">
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-aqua">
-          <span class="info-box-icon"><i class="fa fa-usd"></i></span>
-            <div class="info-box-content">
-              <small>Saldo anda :</small>
-              <span class="info-box-number">Rp. <?php foreach ($sal->result() as $test) {
-                $uang = number_format($test->saldo,2,',','.');
-                echo $uang;
-              } ?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-
-          <div class="col-md-3">
-          <!-- /.box -->
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-chevron-down"></i></span>
-            <div class="info-box-content">
-              <center>
-              <small>Withdrawal Saldo</small>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              <a href="<?= base_url(); ?>Manager/withdraw" class="btn btn-default" role="button">Withdrawal</a>
-              </center>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-
-
         <div class="col-xs-12">
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Laporan Keuangan Diterima</h3>
+              <h3 class="box-title">Transfer yang belum di ACC</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -100,7 +64,7 @@
                   <th>Nama Manajer</th>
                   <th>Penyedia SI</th>
                   <th>Jumlah</th>
-                  <th>Status</th>
+                  <th align="center">Aksi</th>
                 </tr>
                 </thead>
 
@@ -113,7 +77,11 @@
                   <td><?=$field->first_name?></td>
                   <td><?=$field->nama?></td>
                   <td><?=$field->jumlah?></td>
-                  <td><?=$field->status?></td>
+                  <td align="center">
+                        <a class="twitter" data-title="Konfirmasi Transaksi" href="<?=base_url()?>Admin/UpdateTransaksi/<?=$field->id_withdrawal;?>"><button type="button" class="btn btn-default btn-sm">
+                      <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Terima
+                    </button></a>
+                  </td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -126,7 +94,7 @@
                   <th>Nama Manager</th>
                   <th>Penyedia SI</th>
                   <th>Jumlah</th>
-                  <th>Status</th>
+                  <th></th>
                 </tr>
                 </tfoot>
               </table>
@@ -143,7 +111,10 @@
   </div>
   <!-- /.content-wrapper -->
   <?php $this->load->view('Manager/footer');?>
-
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -151,6 +122,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url()?>Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?=base_url()?>Assets/Admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -177,8 +149,15 @@
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/pdfmake.min.js');?>"></script>
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/vfs_fonts.js');?>"></script>
 <!-- page script -->
+<script type="text/javascript">
+      $('a.twitter').confirm({
+        content: "Setelah anda klik tombol ini, admin akan mengirim uang melalui ATM anda",
+    });
+
+</script>
 
 <script>
+
   $(document).ready(function() {
     var handleDataTableButtons = function() {
       if ($("#example").length) {

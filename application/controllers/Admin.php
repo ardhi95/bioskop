@@ -3,6 +3,7 @@ class Admin extends CI_Controller
 {
     function __construct() {
 		parent::__construct();
+
 		
     }
 
@@ -70,6 +71,42 @@ class Admin extends CI_Controller
     public function get_customer(){
         $db['data'] = $this->db->get('customer');
         $this->load->view('Admin/ManCRUD/Customer',$db);
+
+    }
+    public function PTransaksi(){
+        $get['data'] = $this->M_TSaldo->transaksi_Pending();
+        $this->load->view('Admin/transaksisaldopending',$get);   
+    }
+    public function HTransaksi(){
+        $get['data'] = $this->M_TSaldo->transaksi_History();
+        $this->load->view('Admin/transaksisaldo',$get);   
+    }
+    public function UpdateTransaksi(){
+        $id_trans = $this->uri->segment(3);
+        $getManager = $this->db->query('SELECT id_manager FROM transaksi_withdrawal WHERE id_withdrawal="'.$id_trans.'"')->row();
+        //$idMg = is_object($getManager->id_manager);
+        if (is_object($getManager)) {
+                        $update = array('id_withdrawal'=>$id_trans,
+                                    'status'=>1);
+                        $this->db->trans_start();
+                        $this->db->update('transaksi_withdrawal',$update,array('id_withdrawal'=>$id_trans));
+                        $this->db->trans_complete();
+
+                        if ($this->db->trans_status() === FALSE) {
+                            echo $this->session->set_flashdata('gagal', 'gagal');
+                           } else {
+                            echo $this->session->set_flashdata('oke', 'oke');
+                           }
+
+                        
+                        $idMg = ($getManager->id_manager);
+                        $setsal = 0;
+                        //$this->db->query('Update customer set saldo="'.$upsaldo.'" Where id_customer="'.$data['id_customer'].'"'); 
+                        $query = $this->db->query('UPDATE manager_register SET saldo = "'.$setsal.'" WHERE id="'.$idMg.'"');
+                        redirect('Admin/PTransaksi/');
+                        return $query;
+                    }
+    
 
     }
  }

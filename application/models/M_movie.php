@@ -48,6 +48,16 @@ class M_movie extends CI_Model {
 		return $this->db->get('jadwal')->result();
 	}
 
+	public function edit_dataManager($id)
+	{
+		$this->db->where('id', $id);
+		return $this->db->get('manager_register')->result();
+	}
+
+	public function edit_dataJam($where,$table){
+		return $this->db->get_where($table,$where);
+	}
+
 	public function buat_kode($field,$tabelmu,$kod,$kondisi)
 	{
 		$this->db->select('RIGHT('.$field.',3) as kode', FALSE);

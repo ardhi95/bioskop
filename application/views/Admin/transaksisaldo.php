@@ -22,92 +22,11 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=base_url()?>Assets/Admin/dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <?php $this->load->view('Manager/header') ?>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?=$this->session->userdata('picture');?>" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p><?=$this->session->userdata('nama');?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('level');?></a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-file-video-o" aria-hidden="true"></i> <span>Movie Management</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/tambah_movie')?>"><i class="fa fa-circle-o"></i> Movie CRUD</a></li>
-            <li><a href="<?=base_url('Movie/tayang')?>"><i class="fa fa-circle-o"></i> <span> Jam tayang</span></a></li>
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> laporan
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Harian</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Bulananan</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Tahunan</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-money" aria-hidden="true"></i>
-            <span>Transaksi Keuangan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/Transaksi');?>"><i class="fa fa-circle-o"></i> All Transaction</a></li>
-            <li class="active"><a href="<?=base_url('Manager/PTransaksi')?>"><i class="fa fa-circle-o"></i> Pending Transaction</a></li>
-          </ul>
-        </li>
-        <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
+<?php $this->load->view('Admin/header') ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -126,11 +45,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
+
         <div class="col-xs-12">
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Transfer yang belum di ACC</h3>
+              <h3 class="box-title">Laporan Keuangan Diterima</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -143,7 +63,7 @@
                   <th>Nama Manajer</th>
                   <th>Penyedia SI</th>
                   <th>Jumlah</th>
-                  <th align="center">Aksi</th>
+                  <th>Status</th>
                 </tr>
                 </thead>
 
@@ -156,11 +76,11 @@
                   <td><?=$field->first_name?></td>
                   <td><?=$field->nama?></td>
                   <td><?=$field->jumlah?></td>
-                  <td align="center">
-                        <a class="twitter" data-title="Konfirmasi Transaksi" href="<?=base_url()?>Manager/UpdateTransaksi/<?=$field->id_withdrawal;?>"><button type="button" class="btn btn-default btn-sm">
-                      <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Terima
-                    </button></a>
-                  </td>
+                  <td><?php if ($field->status == 1) {
+                      echo "Accepted";
+                  }else{
+                    echo "Pending";
+                    } ?></td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -173,7 +93,7 @@
                   <th>Nama Manager</th>
                   <th>Penyedia SI</th>
                   <th>Jumlah</th>
-                  <th></th>
+                  <th>Status</th>
                 </tr>
                 </tfoot>
               </table>
@@ -190,10 +110,7 @@
   </div>
   <!-- /.content-wrapper -->
   <?php $this->load->view('Manager/footer');?>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 
@@ -201,7 +118,6 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url()?>Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?=base_url()?>Assets/Admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -228,15 +144,8 @@
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/pdfmake.min.js');?>"></script>
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/vfs_fonts.js');?>"></script>
 <!-- page script -->
-<script type="text/javascript">
-      $('a.twitter').confirm({
-        content: "Setelah anda klik tombol ini, admin akan mengirim uang melalui ATM anda",
-    });
-
-</script>
 
 <script>
-
   $(document).ready(function() {
     var handleDataTableButtons = function() {
       if ($("#example").length) {

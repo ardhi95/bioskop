@@ -43,88 +43,8 @@
 
   <?php
   $a['list'] = $this->M_TSaldo->transaksi_Pending();
-  $this->load->view('Manager/header',$a);
-  ?>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?=$this->session->userdata('picture');?>" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p><?=$this->session->userdata('nama');?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('level');?></a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-file-video-o" aria-hidden="true"></i> <span>Movie Management</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="<?=base_url('Manager/tambah_movie')?>"><i class="fa fa-circle-o"></i> Movie CRUD</a></li>
-            <li><a href="<?=base_url('Movie/tayang')?>"><i class="fa fa-circle-o"></i> <span> Jam tayang</span></a></li>
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> laporan
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('today')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Harian</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('weekly')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Mingguan</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('monthly')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Bulananan</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-money" aria-hidden="true"></i>
-            <span>Transaksi Keuangan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/Transaksi');?>"><i class="fa fa-circle-o"></i> All Transaction</a></li>
-            <li><a href="<?=base_url('Manager/PTransaksi')?>"><i class="fa fa-circle-o"></i> Pending Transaction</a></li>
-          </ul>
-        </li>
-        <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+  $this->load->view('Manager/header',$a); ?>
+  <?php $this->load->view('Manager/sidebar') ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -173,39 +93,42 @@
                 
               </div>
 
-              <!-- time Picker -->
-              <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>Jam Tayang</label>
-
-                  <div class="input-group">
-                    <input type="text" name="jam" class="form-control timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.form group -->
+              <div class="form-group">
+                <label>Jadwal Pemutaran</label>
+                <?php
+                    echo "
+                    <select name='jam' id='sid_jadwal' class='form-control select2' required >
+                    <option value='' disabled selected></option>";
+                    foreach ($jadwal->result() as $jdwl) {
+                    echo "<option value='".$jdwl->jam."'>".$jdwl->jam."</option>";
+                    }
+                    echo"
+                    </select>";
+                    ?>
               </div>
 
               <div class="form-group">
+              <img src="<?= base_url(); ?>Assets/gold.png" class="img-thumbnail" width="100" height="100">
+              <img src="<?= base_url(); ?>Assets/premier.png" class="img-thumbnail" width="100" height="100">
+              <img src="<?= base_url(); ?>Assets/reguler.png" class="img-thumbnail" width="100" height="100">
+              <p>Gold-----------------------Premier-----------------------Reguler</p>
+              <br>
                   <label>Type Theater</label>
                   <select name="type_theater" class='form-control select2' required>
                     <option value="" disabled selected></option>
-                    <option value="gold">Gold</option>
-                    <option value="premier">Premier</option>
-                    <option value="reguler">Reguler</option>
+                    <option value="gold">Gold 72 Kursi</option>
+                    <option value="premier">Premier 148 Kursi</option>
+                    <option value="reguler">Reguler 244 Kursi</option>
                   </select>
               </div>
               <div class="form-group">
-                  <label>Kuota</label>
+                  <label>Kuota kursi yang dijual</label>
                   <select name="kuota" class='form-control select2' required>
                     <option value="" disabled selected></option>
+                    <option value="full">Full</option>
                     <option value="depan">Depan</option>
                     <option value="tengah">Tengah</option>
                     <option value="belakang">Belakang</option>
-                    <option value="full">Full</option>
                   </select>
               </div>
               <div class="form-group">
@@ -260,6 +183,7 @@
                   <th>Jam Tayang</th>
                   <th>Type Theater</th>
                   <th>Kuota Kursi</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -271,9 +195,6 @@
                   <td><?=$m->type_theater?></td>
                   <td><?=$m->kuota?></td>
                   <td>
-                  <a class="twitter" data-title="Konfirmasi Hapus" href="<?= base_url() ?>inventaris/Hapus_ALat/<?= $m->id_jadwal ?>"><button type="button" class="btn btn-success btn-xs"><span class='glyphicon glyphicon-zoom-in'></span></button>
-                  </a>
-                  &nbsp;
                     <a href="<?= base_url() ?>Movie/edit/<?= $m->id_jadwal ?>"><button type="button" class="btn btn-info btn-xs"><span class='glyphicon glyphicon-pencil'></span></button></a> &nbsp;
 
                   <a class="twitter" data-title="Konfirmasi Hapus" href="<?= base_url() ?>Movie/delete/<?= $m->id_jadwal ?>"><button type="button" class="btn btn-danger btn-xs"><span class='glyphicon glyphicon-trash'></span></button>

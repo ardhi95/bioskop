@@ -3,7 +3,9 @@ class Saldo extends CI_Controller
 {
     function __construct() {
 		parent::__construct();
-		
+		  if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
     }
 
     public function index(){
@@ -35,9 +37,4 @@ class Saldo extends CI_Controller
            }
     }
 
-    public function test(){
-      if ($this->uri->uri_string() == 'Saldo/test') {
-        echo "bangkre";
-      }
-    }
 }

@@ -27,85 +27,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <?php $this->load->view('Manager/header') ?>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?=$this->session->userdata('picture');?>" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p><?=$this->session->userdata('nama');?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> <?=$this->session->userdata('level');?></a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-
-        <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-file-video-o" aria-hidden="true"></i> <span>Movie Management</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/tambah_movie')?>"><i class="fa fa-circle-o"></i> Movie CRUD</a></li>
-            <li><a href="<?=base_url('Movie/tayang')?>"><i class="fa fa-circle-o"></i> <span> Jam tayang</span></a></li>ayang</a></li>
-            <li class="active">
-              <a href="#"><i class="fa fa-circle-o"></i> laporan
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('today')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Harian</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('weekly')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Mingguan</a></li>
-              </ul>
-              <ul class="treeview-menu">
-                <li><a href="<?=base_url().'Manager/Laporan?id='.$this->M_other->encrypt('monthly')?>"><i class="fa fa-calendar-o" aria-hidden="true"></i> Laporan Bulananan</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-money" aria-hidden="true"></i>
-            <span>Transaksi Keuangan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/Transaksi');?>"><i class="fa fa-circle-o"></i> All Transaction</a></li>
-            <li><a href="<?=base_url('Manager/PTransaksi')?>"><i class="fa fa-circle-o"></i> Pending Transaction</a></li>
-          </ul>
-        </li>
-        <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+  <?php $this->load->view('Manager/sidebar') ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -125,7 +47,56 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+
+          <div class="col-md-3">
+          <!-- Info Boxes Style 2 -->
+          <div class="info-box bg-aqua">
+          <span class="info-box-icon"><i class="fa fa-usd"></i></span>
+            <div class="info-box-content">
+              <small>Penghasilan Hari ini :</small>
+              <span class="info-box-number">Rp. <?=$P_Hari?></span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+          
+           <div class="col-md-3">
+          <!-- /.box -->
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+              <small>Akumulasi Bulan ini</small>
+              <span class="info-box-number">Rp. <?=$P_Bulan?></span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+           <div class="col-md-3">
+          <!-- /.info-box -->
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+              <small>Akumulasi Tahun ini</small>
+              <span class="info-box-number">Rp. <?=$P_Tahun?></span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+          <!-- /.info-box -->
+          <!-- Tabel -->
+          <div class="col-xs-12">
 
           <div class="box">
             <div class="box-header">
@@ -137,12 +108,12 @@
                 <thead>
                 <tr>
                   <th>Kode</th>
-                  <th>Customer</th>
+                  <th>Nama Customer</th>
                   <th>Bioskop</th>
-                  <th>Judul Film</th>
+                  <th>Nama Film</th>
                   <th>Tgl Beli</th>
-                  <th>Tgl Putar</th>
-                  <th>Jam</th>
+                  <th>Jam Tayang</th>
+                  <th>Kursi</th>
                   <th>Jumlah Uang</th>
                 </tr>
                 </thead>
@@ -153,11 +124,11 @@
                   <td><?=$field->kode;?></td>
                   <td><?=$field->customer?></td>
                   <td><?=$field->bioskop?></td>
-                  <td><?=$field->film?></td>
-                  <td><?=$field->beli?></td>
-                  <td><?=$field->tanggal_pemutaran?></td>
+                  <td><?=$field->title?></td>
+                  <td><?=$field->tgl_beli?></td>
                   <td><?=$field->jam?></td>
-                  <td><?="Rp ".number_format($field->jml_uang,2,',','.')?></td>
+                  <td><?=$field->kursi?></td>
+                  <td><?="Rp ".number_format($field->uang,2,',','.')?></td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -165,12 +136,12 @@
                 <tfoot>
                  <tr>
                    <th><small>Kode</small></th>
-                  <th><small>Customer</small></th>
+                  <th><small>Nama Customer</small></th>
                   <th><small>Bioskop</small></th>
-                  <th><small>Judul Film</small></th>
+                  <th><small>Nama Film</small></th>
                   <th><small>Tgl Beli</small></th>
-                  <th><small>Tgl Putar</small></th>
-                  <th><small>Jam</small></th>
+                  <th><small>Jam Tayang</small></th>
+                  <th><small>Kursi</small></th>
                   <th><small>Jumlah Uang</small></th>
                 </tr>
                 </tfoot>
@@ -180,81 +151,6 @@
           </div>
           <!-- /.box -->
         </div>
-
-          <div class="col-md-3">
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-aqua">
-
-            <div class="info-box-content">
-              <small>Penghasilan Hari ini :</small>
-              <span class="info-box-number">Rp. <?=$P_Hari?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 40%"></div>
-              </div>
-                  <span class="progress-description">
-                    40% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-           <div class="col-md-3">
-          <!-- /.box -->
-          <div class="info-box bg-yellow">
-
-            <div class="info-box-content">
-              <small>Akumulasi Minggu ini</small>
-              <span class="info-box-number">Rp. <?=$P_Minggu?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 50%"></div>
-              </div>
-                  <span class="progress-description">
-                    50% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-           <div class="col-md-3">
-          <!-- /.info-box -->
-          <div class="info-box bg-green">
-
-            <div class="info-box-content">
-              <small>Akumulasi Bulan ini</small>
-              <span class="info-box-number">Rp. <?=$P_Bulan?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 20%"></div>
-              </div>
-                  <span class="progress-description">
-                    20% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-           <div class="col-md-3">
-          <!-- /.info-box -->
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-            <div class="info-box-content">
-              <small>Akumulasi Tahun ini</small>
-              <span class="info-box-number">Rp. <?=$P_Tahun?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          </div>
-          <!-- /.info-box -->
         </div>
         <!-- /.col -->
       </div>

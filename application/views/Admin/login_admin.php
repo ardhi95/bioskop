@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?=base_url()?>Assets/Admin/index2.html"><b>SI.</b>Bioskop</a>
+    <a href="<?=base_url()?>Assets/Admin/index2.html"><b>Movie</b>Station</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -36,11 +36,11 @@
     <?=form_open('Admin/Auth',array('id'=>'login','method'=>'post'))?>
 
     <div class="form-group has-feedback">
-        <input type="text" id="id_admin" name="id_admin" class="form-control" placeholder="Kode Regristrasi">
+        <input type="text" id="id_admin" name="id_admin" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" id="authID" name="pasword" class="form-control" placeholder="ID Autentifikasi">
+        <input type="password" id="authID" name="pasword" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
         <?=$this->session->flashdata('gagal')?>
@@ -48,7 +48,7 @@
       <div class="row">
         <div class="col-xs-8">
             <input type="checkbox" id="show" onchange="document.getElementById('authID').type = this.checked ? 'text' : 'password'" >
-            <label for="show">Tampilkan ID Anda</label>
+            <label for="show">Password</label>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
