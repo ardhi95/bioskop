@@ -71,6 +71,9 @@ class Manager extends CI_Controller
 
 
     public function tambah_movie(){
+        if (empty($this->session->userdata('token'))) {
+            redirect('Manager');
+        }else{
 
         $kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
 
@@ -81,7 +84,7 @@ class Manager extends CI_Controller
         $data['Kode'] = $this->CGenerate();
         $data['movie_list'] = $this->M_movie->get_movie($kode_bioskop);
         $this->load->view('Manager/movieadd',$data);
-
+        }
     }
 
     private function CGenerate(){
@@ -95,6 +98,9 @@ class Manager extends CI_Controller
 
     public function profil()
     {
+        if (empty($this->session->userdata('token'))) {
+        redirect('Manager');
+      }else{
             $id = $this->session->userdata('kd_Manager');
             $data['code'] = "BS".rand(1, 1000);
             $data['HStep'] = $this->CekStep();
@@ -102,13 +108,18 @@ class Manager extends CI_Controller
             $where = array('oauth_uid' => $this->session->userdata('id'));
             $data['Man'] = $this->M_movie->edit_dataManager($id);
             $this->load->view('Manager/startup',$data);
+        }
     }
 
     public function Transaksi(){
+        if (empty($this->session->userdata('token'))) {
+        redirect('Manager');
+      }else{
         $id = $this->session->userdata('kd_Manager');
         $get['sal'] = $this->M_TSaldo->getSaldo($id);
         $get['data'] = $this->M_TSaldo->transaksi_list();
         $this->load->view('Manager/transaksisaldo',$get);
+        }
     }
 
     
@@ -121,6 +132,9 @@ class Manager extends CI_Controller
     }
 
     public function Laporan(){
+        if (empty($this->session->userdata('token'))) {
+        redirect('Manager');
+      }else{
         $jenis = $_GET['id'];
         $manajer = $this->session->userdata('kd_Manager');
         $kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$manajer,'bioskop');
@@ -151,6 +165,7 @@ class Manager extends CI_Controller
         $a['P_Tahun'] = number_format($year,2,',','.');
         
         $this->load->view('Manager/laporan',$a);
+        }
     }
 
     public function count_TPnd(){
@@ -184,6 +199,9 @@ class Manager extends CI_Controller
     }
 
     public function Welcome(){
+        if (empty($this->session->userdata('token'))) {
+        redirect('Manager');
+      }else{
         $where = array('id_manager' => $this->session->userdata('kd_Manager'));
         $jumlah = $this->M_other->count_return_row('bioskop',$where);
         $id = $this->session->userdata('kd_Manager');
@@ -197,6 +215,7 @@ class Manager extends CI_Controller
             $where = array('oauth_uid' => $this->session->userdata('id'));
             $data['Man'] = $this->M_movie->edit_dataManager($id);
             $this->load->view('Manager/startup',$data);
+        }
         }
     }
 
@@ -215,6 +234,9 @@ class Manager extends CI_Controller
 
     public function withdraw()
     {
+        if (empty($this->session->userdata('token'))) {
+        redirect('Manager');
+      }else{
         $id = $this->session->userdata('kd_Manager');
         $saldom = $this->M_TSaldo->getSaldo($id)->row();
         if (is_object($saldom)) {
@@ -239,7 +261,7 @@ class Manager extends CI_Controller
         redirect('Manager/Transaksi');
         }
         
-
+    }
     }
 
 }

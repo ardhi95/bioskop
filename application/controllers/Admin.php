@@ -58,30 +58,48 @@ class Admin extends CI_Controller
 
 
     public function get_manager(){
+        if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $db['data'] = $this->db->get('manager_register');
         $this->load->view('Admin/ManCRUD/ManagerRegister',$db);
     }
 
     public function get_bioskop(){
+        if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $db['data'] = $this->M_admin->pantaubioskop();
         $this->load->view('Admin/ManCRUD/Bioskop',$db);
 
     }
 
     public function get_customer(){
+    if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $db['data'] = $this->db->get('customer');
         $this->load->view('Admin/ManCRUD/Customer',$db);
 
     }
     public function PTransaksi(){
+        if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $get['data'] = $this->M_TSaldo->transaksi_Pending();
         $this->load->view('Admin/transaksisaldopending',$get);   
     }
     public function HTransaksi(){
+        if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $get['data'] = $this->M_TSaldo->transaksi_History();
         $this->load->view('Admin/transaksisaldo',$get);   
     }
     public function UpdateTransaksi(){
+        if (empty($this->session->userdata('answer'))) {
+        redirect('Admin');
+      }
         $id_trans = $this->uri->segment(3);
         $getManager = $this->db->query('SELECT id_manager FROM transaksi_withdrawal WHERE id_withdrawal="'.$id_trans.'"')->row();
         //$idMg = is_object($getManager->id_manager);
