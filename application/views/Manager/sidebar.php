@@ -31,8 +31,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=base_url('Manager/tambah_movie')?>"><i class="fa fa-circle-o"></i> Movie CRUD</a></li>
             <li><a href="<?=base_url('Movie/tayang')?>"><i class="fa fa-circle-o"></i> <span> Jam tayang</span></a></li>
+            <li><a href="<?=base_url('Manager/tambah_movie')?>"><i class="fa fa-circle-o"></i> Jadwal Penayangan</a></li>
           </ul>
         </li>
 

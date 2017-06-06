@@ -40,11 +40,11 @@ class Movie extends CI_Controller
 	}
 
 
-	public function delete($id)
+	/*public function delete($id)
 	{
 		$this->db->trans_start();
 		$where = array('id_movie' => $id);
-		$this->M_movie->hapus_data($where,'movie');
+		$this->M_movie->hapus_data($where,'movie_new');
 		$this->db->trans_complete();
 
 		if ($this->db->trans_status() === FALSE) {
@@ -57,7 +57,7 @@ class Movie extends CI_Controller
 			    redirect('Manager/tambah_movie');
            }
 		
-	}
+	}*/
 
 	public function edit($id){
 		$data['data_edit']=$this->M_movie->edit_data($id);
