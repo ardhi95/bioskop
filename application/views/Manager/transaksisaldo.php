@@ -52,8 +52,8 @@
           <span class="info-box-icon"><i class="fa fa-usd"></i></span>
             <div class="info-box-content">
               <small>Saldo anda :</small>
-              <span class="info-box-number">Rp. <?php foreach ($sal->result() as $test) {
-                $uang = number_format($test->saldo,2,',','.');
+              <span class="info-box-number">Rp. <?php foreach ($sal->result() as $saldonya) {
+                $uang = number_format($saldonya->saldo,2,',','.');
                 echo $uang;
               } ?></span>
 
@@ -105,7 +105,7 @@
                 </thead>
 
                 <tbody>
-                <?php foreach($data->result() as $field){ ?>
+                <?php foreach($list->result() as $field){ ?>
                 <tr>
                   <td><?=$field->id_withdrawal;?></td>
                   <td><?=$field->tanggal?></td>

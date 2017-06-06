@@ -74,7 +74,11 @@
       <!-- /.search form -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-
+        <li class="treeview active">
+          <a href="<?=base_url('Admin/get_pendapatan')?>">
+            <i class="fa fa-credit-card" aria-hidden="true"></i> <span>Pendapatan</span>
+          </a>
+        </li>
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-usd" aria-hidden="true"></i> <span>Data Saldo</span>
@@ -84,13 +88,13 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?php if($this->uri->uri_string() == 'Saldo') { echo 'active'; } ?>"><a href="<?=base_url('Saldo')?>"><i class="fa fa-circle-o"></i> Saldo New</a></li>
-            <li class="<?php if($this->uri->uri_string() == 'Saldo/verified') { echo 'active'; } ?>"><a href="<?=base_url('Saldo/verified')?>"><i class="fa fa-circle-o"></i> <span> Saldo terkirim</span></a></li>ayang</a></li>
+            <li class="<?php if($this->uri->uri_string() == 'Saldo/verified') { echo 'active'; } ?>"><a href="<?=base_url('Saldo/verified')?>"><i class="fa fa-circle-o"></i> <span> Saldo Terkirim</span></a></li>
           </ul>
         </li>
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-refresh" aria-hidden="true"></i>
-            <span>CRUD Manajemen</span>
+            <span>Manajemen</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -99,7 +103,7 @@
             <li class="<?php if($this->uri->uri_string() == 'Admin/get_manager') { echo 'active'; } ?>"><a href="<?=base_url('Admin/get_manager')?>"><i class="fa fa-circle-o"></i> Manajer</a></li>
             <li class="<?php if($this->uri->uri_string() == 'Admin/get_bioskop') { echo 'active'; } ?>"><a href="<?=base_url('Admin/get_bioskop')?>"><i class="fa fa-circle-o"></i> Bioskop</a></li>
             <li class="<?php if($this->uri->uri_string() == 'Admin/get_customer') { echo 'active'; } ?>"><a href="<?=base_url('Admin/get_customer')?>"><i class="fa fa-circle-o"></i> Customer</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Movie</a></li>
+            <li><a href="<?=base_url('Admin/daftarFilm')?>"><i class="fa fa-circle-o"></i> Movie</a></li>
           </ul>
         </li>
 

@@ -18,7 +18,7 @@ class Movie extends CI_Controller
 					'kuota'			=> 	$this->input->post('kuota'),
 					'tgl_mulai'		=> 	$this->input->post('tgl_mulai'),
 					'tgl_selesai'	=> 	$this->input->post('tgl_selesai'),
-					'harga'			=>	$this->M_movie->clean($this->input->post('harga')) + ($this->M_movie->clean($this->input->post('harga'))/10),
+					'harga'			=>	$this->M_movie->clean($this->input->post('harga')),
 					'status_tayang' 		=> 	"belum");
 
 
@@ -83,7 +83,7 @@ class Movie extends CI_Controller
 					'kuota'			=> 	$this->input->post('kuota'),
 					'tgl_mulai'		=> 	$this->input->post('tgl_mulai'),
 					'tgl_selesai'	=> 	$this->input->post('tgl_selesai'),
-					'harga'			=>	$this->M_movie->clean($this->input->post('harga')) + ($this->M_movie->clean($this->input->post('harga'))/10),
+					'harga'			=>	$this->M_movie->clean($this->input->post('harga')),
 					'status_tayang' 		=> 	"belum");
 
 

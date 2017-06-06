@@ -117,7 +117,7 @@ class Manager extends CI_Controller
       }else{
         $id = $this->session->userdata('kd_Manager');
         $get['sal'] = $this->M_TSaldo->getSaldo($id);
-        $get['data'] = $this->M_TSaldo->transaksi_list();
+        $get['list'] = $this->M_TSaldo->transaksi_list();
         $this->load->view('Manager/transaksisaldo',$get);
         }
     }

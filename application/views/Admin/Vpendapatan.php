@@ -22,19 +22,18 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=base_url()?>Assets/Admin/dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <?php $this->load->view('Admin/header') ?>
-  
+  <?php $this->load->view('Admin/header') ?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Transaction Management
+        Transaction Report
         <small>CRUD</small>
       </h1>
       <ol class="breadcrumb">
@@ -47,11 +46,60 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
+
+          <div class="col-md-3">
+          <!-- Info Boxes Style 2 -->
+          <div class="info-box bg-aqua">
+          <span class="info-box-icon"><i class="fa fa-usd"></i></span>
+            <div class="info-box-content">
+              <small>Penghasilan Hari ini :</small>
+              <!-- <span class="info-box-number">Rp. <?=$P_Hari?></span> -->
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+          
+           <div class="col-md-3">
+          <!-- /.box -->
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+              <small>Akumulasi Bulan ini</small>
+              <!-- <span class="info-box-number">Rp. <?=$P_Bulan?></span> -->
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+           <div class="col-md-3">
+          <!-- /.info-box -->
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+            <div class="info-box-content">
+              <small>Akumulasi Tahun ini</small>
+              <!-- <span class="info-box-number">Rp. <?=$P_Tahun?></span> -->
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+          <!-- /.info-box -->
+          <!-- Tabel -->
+          <div class="col-xs-12">
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Transfer yang belum di ACC</h3>
+              <h3 class="box-title">Laporan berdasarkan transaksi sebelumnya</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -59,42 +107,35 @@
                 <thead>
                 <tr>
                   <th>Kode</th>
-                  <th>Tanggal</th>
-                  <th>Manager</th>
-                  <th>Nama Manajer</th>
-                  <th>Penyedia SI</th>
-                  <th>Jumlah</th>
-                  <th align="center">Aksi</th>
+                  <th>ID Jadwal</th>
+                  <th>ID Customer</th>
+                  <th>ID Bioskop</th>
+                  <th>Tgl Beli</th>
+                  <th>Jumlah uang</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <?php foreach($data->result() as $field){ ?>
+                <?php foreach($pendapatan as $field){ ?>
                 <tr>
-                  <td><?=$field->id_withdrawal;?></td>
-                  <td><?=$field->tanggal?></td>
-                  <td><?=$field->id?></td>
-                  <td><?=$field->first_name?></td>
-                  <td><?=$field->nama?></td>
-                  <td><?=$field->jumlah?></td>
-                  <td align="center">
-                        <a class="twitter" data-title="Konfirmasi Transaksi" href="<?=base_url()?>Admin/UpdateTransaksi/<?=$field->id_withdrawal;?>"><button type="button" class="btn btn-default btn-sm">
-                      <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Kirim
-                    </button></a>
-                  </td>
+                  <td><?=$field->id_trans;?></td>
+                  <td><?=$field->id_jadwal;?></td>
+                  <td><?=$field->id_customer?></td>
+                  <td><?=$field->id_bioskop?></td>
+                  <td><?=$field->tgl_beli?></td>
+                  <td><?="Rp ".number_format($field->biaya_layanan,2,',','.')?></td>
                 </tr>
                 <?php } ?>
                 </tbody>
 
                 <tfoot>
-                <tr>
-                  <th>Kode</th>
-                  <th>Tanggal</th>
-                  <th>Manager</th>
-                  <th>Nama Manager</th>
-                  <th>Penyedia SI</th>
-                  <th>Jumlah</th>
-                  <th></th>
+                 <tr>
+                   <th><small>Kode</small></th>
+                  <th><small>ID Jadwal</small></th>
+                  <th><small>ID Customer</small></th>
+                  <th><small>ID Bioskop</small></th>
+                  <th><small>Tgl Beli</small></th>
+                  <th><small>Jumlah uang</small></th>
                 </tr>
                 </tfoot>
               </table>
@@ -102,6 +143,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+        </div>
         </div>
         <!-- /.col -->
       </div>
@@ -119,10 +161,10 @@
 <!-- ./wrapper -->
 
 <script src="<?=base_url()?>Assets/Admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="<?=base_url()?>Assets/Admin/dist/js/jqueryUI.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url()?>Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+>
 <!-- SlimScroll -->
 <script src="<?=base_url()?>Assets/Admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -149,10 +191,6 @@
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/pdfmake.min.js');?>"></script>
 <script src="<?php echo base_url('/Assets/Admin/plugins/D_Table/pdfmake/build/vfs_fonts.js');?>"></script>
 <!-- page script -->
-<script type="text/javascript">
-      $('a.twitter').confirm({
-        content: "Setelah anda klik tombol ini, admin akan mengirim uang melalui ATM anda",
-    });
 
 </script>
 
@@ -162,42 +200,42 @@
     var handleDataTableButtons = function() {
       if ($("#example").length) {
         $("#example").DataTable({
-          "pageLength": 30,
+          "pageLength": 40,
           dom: "Bfrtip",
           buttons: [
             {
               extend: "copy",
               className: "btn-sm",
               exportOptions: {
-                columns: [ 0,1,2,3,4,5,6]
+                columns: [ 0,1,2,3,4,5,6,7]
               }
             },
             {
               extend: "csvHtml5",
               className: "btn-sm",
               exportOptions: {
-                columns: [ 0,1,2,3,4,5, 6 ]
+                columns: [ 0,1,2,3,4,5, 6, 7 ]
               }
             },
             {
               extend: "excelHtml5",
               className: "btn-sm",
               exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5,6 ]
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
               }
             },
             {
               extend: "pdfHtml5",
               className: "btn-sm",
               exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
               }
             },
             {
               extend: "print",
               className: "btn-sm",
               exportOptions: {
-                columns: [ 0, 1, 2, 3, 4, 5, 6 ]
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
               }
             },
           ],

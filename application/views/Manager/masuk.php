@@ -25,6 +25,10 @@
   <div class="login-logo">
     <h2><b>Movie</b> Station</h2>
   </div>
+  <div class="login-box-body">
+  <div align="center">
+    <img align="center" src="<?=base_url('Assets/Admin/dist/img/admin/man.png')?>" class="img-circle" alt="User Image">
+  </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in untuk Mengenali Akun Anda</p>

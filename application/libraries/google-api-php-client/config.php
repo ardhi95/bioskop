@@ -25,8 +25,8 @@ $apiConfig = array(
     'application_name' => '',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '766133586892-i5dm8qm771l50stlag2elmtgch5ms28g.apps.googleusercontent.com',
-    'oauth2_client_secret' => '7zNqIKZb1LJ0S5j5iWEbXe4A',
+    'oauth2_client_id' => '428403479774-00i1ecoo9grdutflquteonvv0nhualst.apps.googleusercontent.com',
+    'oauth2_client_secret' => 'c839uR5iWZ7xbP9-YDsg-CAo',
     'oauth2_redirect_uri' => '7zNqIKZb1LJ0S5j5iWEbXe4A',
 
     // The developer key, you get this at https://code.google.com/apis/console

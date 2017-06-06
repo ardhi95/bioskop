@@ -63,7 +63,7 @@ class M_TSaldo extends CI_Model {
 						    bioskop.nama_bioskop as bioskop, 
 						    pembelian_tiket.tgl_beli as tgl_beli, 
 						    jadwal.jam as jam, 
-						    pembelian_tiket.kursi as kursi,
+						    pembelian_tiket.id_kursi as id_kursi,
 						    pembelian_tiket.jml_uang as uang
 						FROM pembelian_tiket 
 						    JOIN jadwal ON jadwal.id_jadwal = pembelian_tiket.id_jadwal
@@ -85,7 +85,7 @@ class M_TSaldo extends CI_Model {
 						    bioskop.nama_bioskop as bioskop, 
 						    pembelian_tiket.tgl_beli as tgl_beli, 
 						    jadwal.jam as jam, 
-						    pembelian_tiket.kursi as kursi,
+						    pembelian_tiket.id_kursi as id_kursi,
 						    pembelian_tiket.jml_uang as uang
 						FROM pembelian_tiket 
 						    JOIN jadwal ON jadwal.id_jadwal = pembelian_tiket.id_jadwal
@@ -106,7 +106,7 @@ class M_TSaldo extends CI_Model {
 						    bioskop.nama_bioskop as bioskop, 
 						    pembelian_tiket.tgl_beli as tgl_beli, 
 						    jadwal.jam as jam, 
-						    pembelian_tiket.kursi as kursi,
+						    pembelian_tiket.id_kursi as id_kursi,
 						    pembelian_tiket.jml_uang as uang
 						FROM pembelian_tiket 
 						    JOIN jadwal ON jadwal.id_jadwal = pembelian_tiket.id_jadwal

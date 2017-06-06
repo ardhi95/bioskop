@@ -66,9 +66,9 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3></h3>
+              <h3>00</h3>
 
-              <p></p>
+              <p>--</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -81,9 +81,9 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3></h3>
+              <h3>00</h3>
 
-              <p></p>
+              <p>--</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -96,9 +96,9 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>00</h3>
 
-              <p>User Registrations</p>
+              <p>--</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -111,9 +111,9 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3>00</h3>
 
-              <p>Unique Visitors</p>
+              <p>--</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

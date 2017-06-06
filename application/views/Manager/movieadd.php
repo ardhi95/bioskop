@@ -175,7 +175,7 @@
               <h3 class="box-title"><b>List of movies</b> you've ever added</h3>
             </div>
             <div class="box-body">
-            <table id="example2" class="table table-bordered table-hover">
+            <table id="example" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>Kode</th>
@@ -307,35 +307,103 @@
 </script>
 
 <script>
+
   $(document).ready(function() {
-    $('#example2').DataTable({
-      "paging": true,
-      "stateSave": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "pagingType": "full_numbers",
-      "language": {
-            "lengthMenu": "Tampil _MENU_ Data",
-            "zeroRecords": "Maaf tidak ada data",
-            "info": "Halaman _PAGE_ dari _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ total records)"
+    var handleDataTableButtons = function() {
+      if ($("#example").length) {
+        $("#example").DataTable({
+          "pageLength": 40,
+          dom: "Bfrtip",
+          buttons: [
+            {
+              extend: "copy",
+              className: "btn-sm",
+              exportOptions: {
+                columns: [ 0,1,2,3,4,5,6,7]
+              }
+            },
+            {
+              extend: "csvHtml5",
+              className: "btn-sm",
+              exportOptions: {
+                columns: [ 0,1,2,3,4,5, 6, 7 ]
+              }
+            },
+            {
+              extend: "excelHtml5",
+              className: "btn-sm",
+              exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+              }
+            },
+            {
+              extend: "pdfHtml5",
+              className: "btn-sm",
+              exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+              }
+            },
+            {
+              extend: "print",
+              className: "btn-sm",
+              exportOptions: {
+                columns: [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+              }
+            },
+          ],
+          responsive: true
+        });
+      }
+    };
+
+    TableManageButtons = function() {
+      "use strict";
+      return {
+        init: function() {
+          handleDataTableButtons();
         }
+      };
+    }();
+
+    $('#datatable').dataTable();
+    $('#datatable-keytable').DataTable({
+      keys: true
     });
 
-    var table = $('#example2').DataTable();
-    $('#example2 tbody')
-        .on( 'mouseenter', 'td', function () {
-            var colIdx = table.cell(this).index().column;
- 
-            $( table.cells().nodes() ).removeClass( 'highlight' );
-            $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
-        } ); 
+    $('#datatable-responsive').DataTable();
 
+    $('#datatable-scroller').DataTable({
+      ajax: "js/datatables/json/scroller-demo.json",
+      deferRender: true,
+      scrollY: 380,
+      scrollCollapse: true,
+      scroller: true
+    });
+
+    var table = $('#datatable-fixed-header').DataTable({
+      fixedHeader: true
+    });
+
+    TableManageButtons.init();
   });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.navbar-nav [data-toggle="tooltip"]').tooltip();
+    $('.navbar-twitch-toggle').on('click', function(event) {
+        event.preventDefault();
+        $('.navbar-twitch').toggleClass('open');
+    });
+    
+    $('.nav-style-toggle').on('click', function(event) {
+        event.preventDefault();
+        var $current = $('.nav-style-toggle.disabled');
+        $(this).addClass('disabled');
+        $current.removeClass('disabled');
+        $('.navbar-twitch').removeClass('navbar-'+$current.data('type'));
+        $('.navbar-twitch').addClass('navbar-'+$(this).data('type'));
+    });
+});
 </script>
 <script type="text/javascript">
    $(function () {

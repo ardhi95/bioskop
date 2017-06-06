@@ -127,7 +127,7 @@
                   <td><?=$field->title?></td>
                   <td><?=$field->tgl_beli?></td>
                   <td><?=$field->jam?></td>
-                  <td><?=$field->kursi?></td>
+                  <td><?=$field->id_kursi?></td>
                   <td><?="Rp ".number_format($field->uang,2,',','.')?></td>
                 </tr>
                 <?php } ?>

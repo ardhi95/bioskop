@@ -127,4 +127,17 @@ class Admin extends CI_Controller
     
 
     }
+
+    public function get_pendapatan()
+    {
+        $data['pendapatan'] = $this->db->get('biaya_layanan')->result();
+        $this->load->view('Admin/Vpendapatan', $data);
+    }
+
+    public function daftarFilm()
+    {
+        $data['film'] = $this->db->get('movie_new')->result();
+        $this->load->view('Admin/VdaftarFilm', $data);
+    }
+
  }
