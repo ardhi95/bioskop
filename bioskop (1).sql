@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Mei 2017 pada 09.55
+-- Generation Time: 06 Jun 2017 pada 23.38
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -23,6 +23,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `biaya_layanan`
+--
+
+CREATE TABLE `biaya_layanan` (
+  `id_trans` int(15) NOT NULL,
+  `id_jadwal` varchar(15) NOT NULL,
+  `id_customer` varchar(21) NOT NULL,
+  `id_bioskop` varchar(15) NOT NULL,
+  `tgl_beli` date NOT NULL,
+  `biaya_layanan` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `biaya_layanan`
+--
+
+INSERT INTO `biaya_layanan` (`id_trans`, `id_jadwal`, `id_customer`, `id_bioskop`, `tgl_beli`, `biaya_layanan`) VALUES
+(1, 'BS306JM001', '102557159192632125437', 'BS306', '2017-06-07', 10000),
+(2, 'BS306JM002', '102557159192632125437', 'BS306', '2017-06-07', 5000),
+(3, 'BS306JM002', '102557159192632125437', 'BS306', '2017-06-07', 7500),
+(4, 'BS306JM001', '102557159192632125437', 'BS306', '2017-06-07', 10000),
+(5, 'BS306JM001', '102557159192632125437', 'BS306', '2017-06-07', 10000),
+(6, 'BS306JM001', '102557159192632125437', 'BS306', '2017-06-07', 5000),
+(7, 'BS306JM002', '102557159192632125437', 'BS306', '2017-06-07', 5000),
+(8, 'BS306JM001', '102557159192632125437', 'BS306', '2017-06-07', 5000);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `bioskop`
 --
 
@@ -38,8 +67,7 @@ CREATE TABLE `bioskop` (
 --
 
 INSERT INTO `bioskop` (`id_bioskop`, `id_manager`, `nama_bioskop`, `alamat`) VALUES
-('BS384', 19, 'Golden Teather', 'JL Bla bla bla'),
-('BS732', 20, 'Best Cinaplex', 'Jl. Jendral Sudirman no 1 Kendal');
+('BS306', 27, 'MOVIEMAX Sarinah', 'Sarinah Plaza Lt. 03, Jalan Basuki Rachmat No. 2A, Klojen, Kiduldalem, Klojen, Kota Malang, Jawa Timur 65119');
 
 -- --------------------------------------------------------
 
@@ -51,7 +79,6 @@ CREATE TABLE `customer` (
   `id_customer` varchar(21) NOT NULL,
   `email` varchar(40) NOT NULL,
   `nama` varchar(20) NOT NULL,
-  `gender` enum('Laki-laki','Perempuan') NOT NULL,
   `no_hp` varchar(13) NOT NULL,
   `saldo` int(15) NOT NULL,
   `foto` text NOT NULL
@@ -61,14 +88,10 @@ CREATE TABLE `customer` (
 -- Dumping data untuk tabel `customer`
 --
 
-INSERT INTO `customer` (`id_customer`, `email`, `nama`, `gender`, `no_hp`, `saldo`, `foto`) VALUES
-('101815372665836078347', 'asus.va60@gmail.com', 'Tahu Kuning', 'Laki-laki', '082233221304', 200000, 'https://lh3.googleusercontent.com/-an_V3jPzoiE/AAAAAAAAAAI/AAAAAAAAABI/MA0Ht_pTjI4/photo.jpg'),
-('102557159192632125437', 'ar.dhi950@gmail.com', 'Ardhi Fauzi', 'Laki-laki', '', 110000, 'https://lh3.googleusercontent.com/-eG2OUzZGACI/AAAAAAAAAAI/AAAAAAAAA48/QiqYDqRZOc8/photo.jpg'),
-('CTM002', 'faf@gmail.com', 'sd', 'Perempuan', '086543215611', 20, ''),
-('CTM007', 'chusmitaadi0516@gmail.com', 'ui', 'Laki-laki', '083834177799', 0, ''),
-('CTM008', 'cektugas2016@gmail.com', 'MAs Adi', 'Laki-laki', '7374937487334', 120000, ''),
-('CTM009', 'tikaakusumaa@gmail.com', 'lilis', 'Perempuan', '089612311623', 0, ''),
-('CTM010', 'tikakusuma03@gmail.com', 'tika', 'Perempuan', '081222121999', 25000, '');
+INSERT INTO `customer` (`id_customer`, `email`, `nama`, `no_hp`, `saldo`, `foto`) VALUES
+('101815372665836078347', 'asus.va60@gmail.com', 'Tahu Kuning', '082233221304', 994000, 'https://lh3.googleusercontent.com/-an_V3jPzoiE/AAAAAAAAAAI/AAAAAAAAABI/MA0Ht_pTjI4/photo.jpg'),
+('102557159192632125437', 'ar.dhi950@gmail.com', 'Ardhi Fauzi', '082233221403', 17556600, 'https://lh3.googleusercontent.com/-eG2OUzZGACI/AAAAAAAAAAI/AAAAAAAAA48/QiqYDqRZOc8/photo.jpg'),
+('113222719112956151391', 'achmad.fariiz@gmail.com', 'achmad faris', '', 1045000, 'https://lh5.googleusercontent.com/-NYVF1tTPH8A/AAAAAAAAAAI/AAAAAAAAATo/psRJPI6-BKI/photo.jpg');
 
 -- --------------------------------------------------------
 
@@ -94,14 +117,8 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`id_jadwal`, `id_bioskop`, `id_movie`, `jam`, `type_theater`, `kuota`, `tgl_mulai`, `tgl_selesai`, `harga`, `status_tayang`) VALUES
-('BS384JM004', 'BS384', 'tt1790809', '07:45:00', 'premier', 'belakang', '2017-05-01', '2017-06-10', 30000, 'belum'),
-('BS384JM005', 'BS384', 'tt2771200', '19:00:00', 'gold', 'full', '2017-05-01', '2017-06-10', 27500, 'belum'),
-('BS384JM006', 'BS384', 'tt2771200', '23:45:00', 'reguler', 'depan', '2017-05-01', '2017-06-06', 27500, 'belum'),
-('BS384JM007', 'BS384', 'tt1293847', '09:45:00', 'premier', 'belakang', '2017-06-01', '2017-06-06', 33000, 'belum'),
-('BS384JM008', 'BS384', 'tt3371366', '20:30:00', 'gold', 'full', '2017-05-01', '2017-05-18', 27500, 'belum'),
-('BS384JM009', 'BS384', 'tt2771200', '23:30:00', 'premier', 'tengah', '2017-05-27', '2017-05-29', 33000, 'belum'),
-('BS384JM010', 'BS384', 'tt5946936', '01:45:00', 'reguler', 'full', '2017-05-28', '2017-05-30', 44000, 'belum'),
-('BS732JM001', 'BS732', 'tt1790809', '08:00:00', 'premier', 'tengah', '2017-05-31', '2017-06-01', 33000, 'belum');
+('BS306JM001', 'BS306', 'tt1790809', '23:45:00', 'gold', 'full', '2017-06-05', '2017-06-07', 25000, 'belum'),
+('BS306JM002', 'BS306', 'tt6467500', '23:45:00', 'premier', 'tengah', '2017-06-05', '2017-06-08', 25000, 'belum');
 
 -- --------------------------------------------------------
 
@@ -115,52 +132,12 @@ CREATE TABLE `jam_pemutaran` (
   `jam` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `kursi_bioskop`
+-- Dumping data untuk tabel `jam_pemutaran`
 --
 
-CREATE TABLE `kursi_bioskop` (
-  `id_kursi` varchar(15) NOT NULL,
-  `nama_kursi` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `kursi_bioskop`
---
-
-INSERT INTO `kursi_bioskop` (`id_kursi`, `nama_kursi`) VALUES
-('1', 'A1'),
-('10', 'A10'),
-('11', 'B1'),
-('12', 'B2'),
-('13', 'B3'),
-('14', 'B4'),
-('15', 'B5'),
-('16', 'B6'),
-('17', 'B7'),
-('18', 'B8'),
-('19', 'B9'),
-('2', 'A2'),
-('20', 'B10'),
-('21', 'C1'),
-('22', 'C2'),
-('23', 'C3'),
-('24', 'C4'),
-('25', 'C5'),
-('26', 'C6'),
-('27', 'C7'),
-('28', 'C8'),
-('29', 'C9'),
-('3', 'A3'),
-('30', 'C10'),
-('4', 'A4'),
-('5', 'A5'),
-('6', 'A6'),
-('7', 'A7'),
-('8', 'A8'),
-('9', 'A9');
+INSERT INTO `jam_pemutaran` (`id_jadwal`, `id_bioskop`, `jam`) VALUES
+('BS306WKT001', 'BS306', '00:45:00');
 
 -- --------------------------------------------------------
 
@@ -188,10 +165,10 @@ CREATE TABLE `manager_register` (
 --
 
 INSERT INTO `manager_register` (`id`, `oauth_provider`, `oauth_uid`, `first_name`, `last_name`, `email`, `locale`, `picture_url`, `created`, `modified`, `no_rekening`, `saldo`) VALUES
-(5, 'google', '109086189261824735957', 'Tika', 'Kusuma', 'tikakusuma03@gmail.com', 'in', 'https://lh5.googleusercontent.com/-jg5iMJG5DqY/AAAAAAAAAAI/AAAAAAAAAGI/QpGVosVLHsg/photo.jpg', '2017-04-13 14:15:02', '2017-04-13 14:35:42', '0', 0),
-(8, 'google', '102557159192632125437', 'Ardhi', 'Fauzi', 'ar.dhi950@gmail.com', 'en', 'https://lh3.googleusercontent.com/-eG2OUzZGACI/AAAAAAAAAAI/AAAAAAAAA48/QiqYDqRZOc8/photo.jpg', '2017-04-17 05:47:37', '2017-04-17 05:50:52', '0', 0),
-(19, 'google', '101815372665836078347', 'Tahu', 'Kuning', 'asus.va60@gmail.com', 'in', 'https://lh3.googleusercontent.com/-an_V3jPzoiE/AAAAAAAAAAI/AAAAAAAAABI/MA0Ht_pTjI4/photo.jpg', '2017-05-23 22:13:50', '2017-05-29 08:52:24', '0', 0),
-(20, 'google', '113439956080643245140', 'thppl', 'assets', 'thpplassets@gmail.com', 'in', 'https://lh6.googleusercontent.com/-z3m5leei9mQ/AAAAAAAAAAI/AAAAAAAAAAc/KfFSp7NV5Ng/photo.jpg', '2017-05-26 15:09:52', '2017-05-26 15:09:52', '0', 0);
+(19, 'google', '101815372665836078347', 'Tahu', 'Kuning', 'asus.va60@gmail.com', 'in', 'https://lh3.googleusercontent.com/-an_V3jPzoiE/AAAAAAAAAAI/AAAAAAAAABI/MA0Ht_pTjI4/photo.jpg', '2017-05-23 22:13:50', '2017-06-01 15:46:21', '0', 594080),
+(20, 'google', '113439956080643245140', 'thppl', 'assets', 'thpplassets@gmail.com', 'in', 'https://lh6.googleusercontent.com/-z3m5leei9mQ/AAAAAAAAAAI/AAAAAAAAAAc/KfFSp7NV5Ng/photo.jpg', '2017-05-26 15:09:52', '2017-05-26 15:09:52', '0', 0),
+(27, 'google', '105235181990058794291', 'Movie', 'Station', 'moviestation.at@gmail.com', 'in', 'https://lh6.googleusercontent.com/-cMdo1_M_1_A/AAAAAAAAAAI/AAAAAAAAABE/R36lGcczK78/photo.jpg', '2017-06-01 11:17:31', '2017-06-06 19:59:43', '1234567890', 1475000),
+(30, 'google', '110179582775645620288', 'tika', 'kusuma', 'tikaakusumaa@gmail.com', 'in', 'https://lh3.googleusercontent.com/-XwEDX95uMGo/AAAAAAAAAAI/AAAAAAAAABA/GVmTSiqA4CM/photo.jpg', '2017-06-03 10:24:42', '2017-06-03 10:24:42', '1431140024', 302500);
 
 -- --------------------------------------------------------
 
@@ -243,28 +220,33 @@ INSERT INTO `movie_new` (`id_movie`, `Title`, `Production`, `Year`, `Released`, 
 --
 
 CREATE TABLE `pembelian_tiket` (
-  `id_pembelian` varchar(15) NOT NULL,
-  `id_customer` varchar(15) NOT NULL,
+  `id_pembelian` int(15) NOT NULL,
+  `id_jadwal` varchar(15) NOT NULL,
+  `id_customer` varchar(21) NOT NULL,
   `id_bioskop` varchar(15) NOT NULL,
-  `id_kursi` varchar(15) NOT NULL,
+  `id_kursi` text NOT NULL,
   `kursi` text NOT NULL,
   `tgl_beli` date NOT NULL,
-  `id_jadwal` varchar(15) NOT NULL,
-  `jml_uang` int(8) NOT NULL
+  `jml_uang` int(8) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `penjualan_tiket`
+-- Dumping data untuk tabel `pembelian_tiket`
 --
 
-CREATE TABLE `penjualan_tiket` (
-  `id_penjualan` varchar(15) NOT NULL,
-  `id_pembelian` varchar(15) NOT NULL,
-  `id_bioskop` varchar(15) NOT NULL,
-  `jml_uang` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `pembelian_tiket` (`id_pembelian`, `id_jadwal`, `id_customer`, `id_bioskop`, `id_kursi`, `kursi`, `tgl_beli`, `jml_uang`, `status`) VALUES
+(1, 'BS306JM002', '102557159192632125437', 'BS306', '75, 76', '2', '2017-06-06', 55000, 0),
+(2, 'BS306JM001', '102557159192632125437', 'BS306', '15, 16, 26, 27', '4', '2017-06-06', 110000, 0),
+(3, 'BS306JM002', '113222719112956151391', 'BS306', '101, 102', '2', '2017-06-06', 55000, 1),
+(4, 'BS306JM001', '102557159192632125437', 'BS306', '4, 5, 15, 16', '4', '2017-06-07', 110000, 0),
+(5, 'BS306JM002', '102557159192632125437', 'BS306', '98, 99', '2', '2017-06-07', 55000, 0),
+(6, 'BS306JM002', '102557159192632125437', 'BS306', '78, 79, 80', '3', '2017-06-07', 82500, 0),
+(7, 'BS306JM001', '102557159192632125437', 'BS306', '92, 93, 62, 63', '4', '2017-06-07', 110000, 0),
+(8, 'BS306JM001', '102557159192632125437', 'BS306', '10, 22, 32, 21', '4', '2017-06-07', 110000, 0),
+(9, 'BS306JM001', '102557159192632125437', 'BS306', '11, 33', '2', '2017-06-07', 55000, 0),
+(10, 'BS306JM002', '102557159192632125437', 'BS306', '102, 105', '2', '2017-06-07', 55000, 0),
+(11, 'BS306JM001', '102557159192632125437', 'BS306', '29, 30', '2', '2017-06-07', 55000, 0);
 
 -- --------------------------------------------------------
 
@@ -285,7 +267,7 @@ CREATE TABLE `penyedia_layanan` (
 --
 
 INSERT INTO `penyedia_layanan` (`id_admin`, `nama`, `saldo`, `email`, `password`) VALUES
-('admin', 'Tika Kusuma W', 63700, 'admin', '21232f297a57a5a743894a0e4a801fc3');
+('admin', 'Tika Kusuma W', 1030220, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -306,20 +288,10 @@ CREATE TABLE `transaksi_saldo` (
 --
 
 INSERT INTO `transaksi_saldo` (`id_transaksi_saldo`, `jumlah_saldo`, `tanggal`, `id_customer`, `status`) VALUES
-('1223344566788', 500000, '2017-06-02', '102557159192632125437', 1),
-('16hs96', 100000, '2017-06-02', '102557159192632125437', 1),
-('16hs96W', 100000, '2017-06-02', '102557159192632125437', 1),
-('CGR6793-7649', 100000, '2017-06-02', '101815372665836078347', 1),
-('Ghidt', 100000, '2017-06-02', '102557159192632125437', 1),
-('Gjfry754', 700000, '2017-06-02', '102557159192632125437', 1),
-('Jshe939463', 1000000, '2017-06-02', '102557159192632125437', 1),
-('Jshsia', 100000, '2017-06-02', '101815372665836078347', 1),
-('Jshsial', 100000, '2017-06-02', '101815372665836078347', 0),
-('Ksjs', 500000, '2017-06-02', '102557159192632125437', 1),
-('qwert', 20, '2017-05-15', 'CTM002', 1),
-('TS002', 120000, '2017-05-17', 'CTM008', 1),
-('TS003', 25000, '2017-05-17', 'CTM010', 1),
-('Ushsgs', 100000, '2017-06-02', '102557159192632125437', 1);
+('01', 1000000, '2017-06-02', '113222719112956151391', 1),
+('1000000', 100000, '2017-06-02', '113222719112956151391', 1),
+('5799ggd', 100000, '2017-06-02', '102557159192632125437', 1),
+('Hdhdhd', 100000, '2017-06-02', '102557159192632125437', 1);
 
 --
 -- Trigger `transaksi_saldo`
@@ -339,12 +311,13 @@ DELIMITER ;
 --
 
 CREATE TABLE `transaksi_withdrawal` (
-  `id_withdrawal` varchar(15) NOT NULL,
+  `id_withdrawal` int(15) NOT NULL,
   `tanggal` date NOT NULL,
   `waktu` time DEFAULT NULL,
   `id_manager` int(11) NOT NULL,
   `id_admin` varchar(15) NOT NULL,
-  `jumlah` varchar(15) NOT NULL,
+  `jumlah` int(20) NOT NULL,
+  `no_transfer` varchar(50) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -364,6 +337,12 @@ DELIMITER ;
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `biaya_layanan`
+--
+ALTER TABLE `biaya_layanan`
+  ADD PRIMARY KEY (`id_trans`);
 
 --
 -- Indexes for table `bioskop`
@@ -390,14 +369,7 @@ ALTER TABLE `jadwal`
 -- Indexes for table `jam_pemutaran`
 --
 ALTER TABLE `jam_pemutaran`
-  ADD PRIMARY KEY (`id_jadwal`),
   ADD KEY `id_bioskop` (`id_bioskop`);
-
---
--- Indexes for table `kursi_bioskop`
---
-ALTER TABLE `kursi_bioskop`
-  ADD PRIMARY KEY (`id_kursi`);
 
 --
 -- Indexes for table `manager_register`
@@ -418,14 +390,7 @@ ALTER TABLE `pembelian_tiket`
   ADD PRIMARY KEY (`id_pembelian`),
   ADD KEY `id_customer` (`id_customer`),
   ADD KEY `id_bioskop` (`id_bioskop`),
-  ADD KEY `id_jadwal` (`id_jadwal`),
-  ADD KEY `id_kursi` (`id_kursi`);
-
---
--- Indexes for table `penjualan_tiket`
---
-ALTER TABLE `penjualan_tiket`
-  ADD PRIMARY KEY (`id_penjualan`);
+  ADD KEY `id_jadwal` (`id_jadwal`);
 
 --
 -- Indexes for table `penyedia_layanan`
@@ -453,10 +418,25 @@ ALTER TABLE `transaksi_withdrawal`
 --
 
 --
+-- AUTO_INCREMENT for table `biaya_layanan`
+--
+ALTER TABLE `biaya_layanan`
+  MODIFY `id_trans` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT for table `manager_register`
 --
 ALTER TABLE `manager_register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `pembelian_tiket`
+--
+ALTER TABLE `pembelian_tiket`
+  MODIFY `id_pembelian` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `transaksi_withdrawal`
+--
+ALTER TABLE `transaksi_withdrawal`
+  MODIFY `id_withdrawal` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -478,7 +458,6 @@ ALTER TABLE `jadwal`
 -- Ketidakleluasaan untuk tabel `jam_pemutaran`
 --
 ALTER TABLE `jam_pemutaran`
-  ADD CONSTRAINT `jam_pemutaran_ibfk_1` FOREIGN KEY (`id_bioskop`) REFERENCES `bioskop` (`id_bioskop`),
   ADD CONSTRAINT `jam_pemutaran_ibfk_2` FOREIGN KEY (`id_bioskop`) REFERENCES `bioskop` (`id_bioskop`);
 
 --
@@ -487,8 +466,7 @@ ALTER TABLE `jam_pemutaran`
 ALTER TABLE `pembelian_tiket`
   ADD CONSTRAINT `pembelian_tiket_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`),
   ADD CONSTRAINT `pembelian_tiket_ibfk_2` FOREIGN KEY (`id_bioskop`) REFERENCES `bioskop` (`id_bioskop`),
-  ADD CONSTRAINT `pembelian_tiket_ibfk_4` FOREIGN KEY (`id_jadwal`) REFERENCES `jam_pemutaran` (`id_jadwal`),
-  ADD CONSTRAINT `pembelian_tiket_ibfk_5` FOREIGN KEY (`id_kursi`) REFERENCES `kursi_bioskop` (`id_kursi`);
+  ADD CONSTRAINT `pembelian_tiket_ibfk_4` FOREIGN KEY (`id_jadwal`) REFERENCES `jadwal` (`id_jadwal`);
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi_saldo`
