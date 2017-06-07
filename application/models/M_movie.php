@@ -21,6 +21,23 @@ class M_movie extends CI_Model {
 		return $query;
 	}
 
+	public function getTikectNow($kode_bioskop)
+	{
+		$query = $this->db->query("SELECT SUM(`kursi`) As Kursi FROM `pembelian_tiket` WHERE `id_bioskop`= '".$kode_bioskop."' AND DATE(pembelian_tiket.tgl_beli) = DATE(NOW())");
+		return $query;
+	}
+
+	public function getTikectMonth($kode_bioskop)
+	{
+		$query = $this->db->query("SELECT SUM(`kursi`) As Kursi FROM `pembelian_tiket` WHERE `id_bioskop`= '".$kode_bioskop."' AND MONTH(pembelian_tiket.tgl_beli) = MONTH(NOW())");
+		return $query;
+	}
+
+	public function getTikectA($kode_bioskop)
+	{
+		$query = $this->db->query("SELECT SUM(`kursi`) As Kursi FROM `pembelian_tiket` WHERE `id_bioskop`= '".$kode_bioskop."'");
+		return $query;
+	}
 
 	public function getFilm()
 	{

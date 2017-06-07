@@ -89,20 +89,19 @@
                 
               </div>
 
-              <!-- time Picker -->
-              <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>Jam Tayang</label>
-
-                  <div class="input-group">
-                    <input type="text" name="jam" value="<?= $datasaya->jam; ?>" class="form-control timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.form group -->
+              <div class="form-group">
+                <label>Jadwal Pemutaran</label>
+                
+                <?php
+                    echo "
+                    <select name='jam' id='sid_jadwal' class='form-control select2' >
+                    <option value=".$datasaya->jam." selected></option>";
+                    foreach ($jadwal->result() as $jdwl) {
+                    echo "<option value='".$jdwl->jam."'>".$jdwl->jam."</option>";
+                    }
+                    echo"
+                    </select>";
+                    ?>
               </div>
 
               <div class="form-group">

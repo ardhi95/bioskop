@@ -79,7 +79,7 @@
                   <th>Terakir Masuk</th>
                   <th>Rekening</th>
                   <th>Saldo</th>
-                  <th>Aksi</th>
+                  <!-- <th>Aksi</th> -->
                 </tr>
                 </thead>
 
@@ -94,9 +94,9 @@
                   <td><?=$field->modified?></td>
                   <td><?=$field->no_rekening;?></td>
                   <td><?="Rp ".number_format($field->saldo,2,',','.')?></td>
-                  <td align="center">
+                  <!-- <td align="center">
                   <a class="twitter" data-title="ACC Transaksi" href="<?= base_url()."Saldo/del?kode=".$this->M_other->encrypt($field->id)?>"><button type="button" class="btn btn-danger btn-xs"><span class='glyphicon glyphicon-trash'></span></button>
-                  </td>
+                  </td> -->
                 </tr>
                 <?php } ?>
                 </tbody>

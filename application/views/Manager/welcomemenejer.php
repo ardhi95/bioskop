@@ -66,14 +66,15 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>00</h3>
-
-              <p>--</p>
+            <?php foreach ($tiket->result() as $key) {?>
+              <h3><?php echo $key->Kursi; ?></h3>
+              <?php } ?>
+              <p>Penjualan tiket hari ini</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a> -->
           </div>
         </div>
         <!-- ./col -->
@@ -81,14 +82,16 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>00</h3>
+              <?php foreach ($tiketM->result() as $keym) {?>
+              <h3><?php echo $keym->Kursi; ?></h3>
+              <?php } ?>
 
-              <p>--</p>
+              <p>Penjualan tiket bulan ini</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
           </div>
         </div>
         <!-- ./col -->
@@ -96,19 +99,20 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>00</h3>
+              <?php foreach ($tiketA->result() as $keya) {?>
+              <h3><?php echo $keya->Kursi; ?></h3>
+              <?php } ?>
 
-              <p>--</p>
+              <p>Penjualan tiket tahun ini</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
+        <!-- <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-red">
             <div class="inner">
               <h3>00</h3>
@@ -120,9 +124,10 @@
             </div>
             <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> -->
         <!-- ./col -->
       </div>
+      
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">

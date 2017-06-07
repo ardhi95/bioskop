@@ -34,7 +34,7 @@
     <section class="content-header">
       <h1>
         Transaction Report
-        <small>CRUD</small>
+        <small>Biaya Layanan</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -53,7 +53,9 @@
           <span class="info-box-icon"><i class="fa fa-usd"></i></span>
             <div class="info-box-content">
               <small>Penghasilan Hari ini :</small>
-              <!-- <span class="info-box-number">Rp. <?=$P_Hari?></span> -->
+              <span class="info-box-number">Rp. <?php foreach ($penNow as $key) {
+                echo $key->Total;
+              } ?></span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: 100%"></div>
@@ -69,7 +71,9 @@
             <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
             <div class="info-box-content">
               <small>Akumulasi Bulan ini</small>
-              <!-- <span class="info-box-number">Rp. <?=$P_Bulan?></span> -->
+              <span class="info-box-number">Rp. <?php foreach ($penM as $keym) {
+                echo $keym->Total;
+              } ?></span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: 100%"></div>
@@ -84,7 +88,9 @@
             <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
             <div class="info-box-content">
               <small>Akumulasi Tahun ini</small>
-              <!-- <span class="info-box-number">Rp. <?=$P_Tahun?></span> -->
+              <span class="info-box-number">Rp. <?php foreach ($penA as $keya) {
+                echo $keya->Total;
+              } ?></span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: 100%"></div>

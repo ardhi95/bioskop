@@ -130,6 +130,11 @@ class Admin extends CI_Controller
 
     public function get_pendapatan()
     {
+        $this->load->model('M_admin');
+        $data['penNow'] = $this->M_admin->getReportNow()->result();
+        $data['penM'] = $this->M_admin->getReportM()->result();
+        $data['penA'] = $this->M_admin->getReportA()->result();
+
         $data['pendapatan'] = $this->db->get('biaya_layanan')->result();
         $this->load->view('Admin/Vpendapatan', $data);
     }
@@ -138,6 +143,11 @@ class Admin extends CI_Controller
     {
         $data['film'] = $this->db->get('movie_new')->result();
         $this->load->view('Admin/VdaftarFilm', $data);
+    }
+
+    public function tambahFilm()
+    {
+        $this->load->view('Admin/VtambahFilm');
     }
 
  }

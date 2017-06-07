@@ -31,15 +31,12 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Transaction Management
-        <small>CRUD</small>
-      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
         <li class="active">Data tables</li>
       </ol>
+      <h1>Data Movie </h1><a href="<?= base_url(); ?>Admin/tambahFilm" class="btn btn-info" role="button">Tambah Film</a>
     </section>
 
     <!-- Main content -->
@@ -50,7 +47,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Laporan Keuangan Diterima</h3>
+              <h3 class="box-title">Daftar Film</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

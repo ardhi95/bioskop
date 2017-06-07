@@ -7,6 +7,29 @@ class Movie extends CI_Controller
 		$this->load->model('user');
     }
 
+    public function tambahFilm()
+    {
+    	$data = array(
+    			'id_movie' 		=> $this->input->post('id_movie'),
+    			'Title' 		=> $this->input->post('Title'),
+    			'Production' 	=> $this->input->post('Production'),
+    			'Year' 			=> $this->input->post('Year'),
+    			'Released' 		=> $this->input->post('Released'),
+    			'Genre' 		=> $this->input->post('Genre'),
+    			'Director' 		=> $this->input->post('Director'),
+    			'Writer' 		=> $this->input->post('Writer'),
+    			'Actors' 		=> $this->input->post('Actors'),
+    			'Plot' 			=> $this->input->post('Plot'),
+    			'Language' 		=> $this->input->post('Language'),
+    			'Country' 		=> $this->input->post('Country'),
+    			'Poster' 		=> $this->input->post('Poster')
+    		);
+    	$insert = $this->db->insert('movie_new',$data);
+    	if ($insert) {
+    		redirect('Admin/daftarFilm');
+    	}
+    }
+
     public function tambahkan(){
 
 		$data = array(
@@ -60,8 +83,11 @@ class Movie extends CI_Controller
 	}*/
 
 	public function edit($id){
+		$kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+		$kondisi = array('id_bioskop' => $kode_bioskop);
 		$data['data_edit']=$this->M_movie->edit_data($id);
 		$data['film'] = $this->M_movie->getFilm('');
+		$data['jadwal'] = $this->M_movie->edit_dataJam($kondisi,'jam_pemutaran');
 		/*$where = array('id_movie' => $id);
 		$data['data_edit'] = $this->M_movie->edit_data($where,'jadwal')->result();
 		$kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');

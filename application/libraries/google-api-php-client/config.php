@@ -25,9 +25,9 @@ $apiConfig = array(
     'application_name' => '',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '428403479774-00i1ecoo9grdutflquteonvv0nhualst.apps.googleusercontent.com',
-    'oauth2_client_secret' => 'c839uR5iWZ7xbP9-YDsg-CAo',
-    'oauth2_redirect_uri' => '7zNqIKZb1LJ0S5j5iWEbXe4A',
+    'oauth2_client_id' => '1048877417439-t1gv6u1tqnpvhfjvtcd7irborahh0mqb.apps.googleusercontent.com',
+    'oauth2_client_secret' => 'JYsl_iTRk8uVSJNFGaMSNfSX',
+    'oauth2_redirect_uri' => 'http://moviestation.hol.es',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => '',

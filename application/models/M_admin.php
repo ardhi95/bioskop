@@ -20,12 +20,33 @@ function Sign($Nama,$password){
 		}
 
 
-public function pantaubioskop(){
+	public function pantaubioskop(){
 		$this->db->select('*');
 		$this->db->from('bioskop');
 		$this->db->join('manager_register', 'bioskop.id_manager = manager_register.id');
 		$query = $this->db->get();
 
+		return $query;
+	}
+
+	public function getReportNow()
+	{
+	
+		$query = $this->db->query('SELECT SUM(`biaya_layanan`) as Total FROM biaya_layanan WHERE DATE(biaya_layanan.tgl_beli) = DATE(NOW())');
+		return $query;
+	}
+
+	public function getReportM()
+	{
+	
+		$query = $this->db->query('SELECT SUM(`biaya_layanan`) as Total FROM biaya_layanan WHERE MONTH(biaya_layanan.tgl_beli) = MONTH(NOW())');
+		return $query;
+	}
+
+	public function getReportA()
+	{
+	
+		$query = $this->db->query('SELECT SUM(`biaya_layanan`) as Total FROM biaya_layanan');
 		return $query;
 	}
 }

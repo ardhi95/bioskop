@@ -187,8 +187,12 @@ class Manager extends CI_Controller
                 $this->session->picture = $this->M_movie->first_value_where('picture_url','oauth_uid',$atentikasi,'manager_register');
                 $this->session->kd_Manager = $this->M_movie->first_value_where('id','oauth_uid',$this->session->userdata('id'),'manager_register');
 
-                
-                $this->load->view('Manager/welcomemenejer');
+                $this->load->model('M_movie');
+                $kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+                $data['tiket'] = $this->M_movie->getTikectNow($kode_bioskop);
+                $data['tiketM'] = $this->M_movie->getTikectMonth($kode_bioskop);
+                $data['tiketA'] = $this->M_movie->getTikectA($kode_bioskop);
+                $this->load->view('Manager/welcomemenejer',$data);
 
             }
                 else{
@@ -207,7 +211,12 @@ class Manager extends CI_Controller
         $id = $this->session->userdata('kd_Manager');
 
         if ($jumlah > 0) {
-            $this->load->view('Manager/welcomemenejer');
+            $this->load->model('M_movie');
+            $kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+            $data['tiket'] = $this->M_movie->getTikectNow($kode_bioskop);
+            $data['tiketM'] = $this->M_movie->getTikectMonth($kode_bioskop);
+            $data['tiketA'] = $this->M_movie->getTikectA($kode_bioskop);
+            $this->load->view('Manager/welcomemenejer', $data);
         }else{
             $data['code'] = "BS".rand(1, 1000);
             $data['HStep'] = $this->CekStep();

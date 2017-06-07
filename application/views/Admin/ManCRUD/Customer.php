@@ -75,7 +75,6 @@
                   <th>Kode</th>
                   <th>Email</th>
                   <th>Nama</th>
-                  <th>Gender</th>
                   <th>Nomor HP</th>
                   <th>Jumlah Saldo</th>
                 </tr>
@@ -90,7 +89,6 @@
                   <td><?=$field->id_customer?></td>
                   <td><?=$field->email?></td>
                   <td><?=$field->nama?></td>
-                  <td><?=$field->gender?></td>
                   <td><?=$field->no_hp?></td>
                   <td><?="Rp ".number_format($field->saldo,2,',','.')?></td>
                 </tr>
