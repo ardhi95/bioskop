@@ -102,8 +102,7 @@
                     foreach ($jadwal->result() as $jdwl) {
                     echo "<option value='".$jdwl->jam."'>".$jdwl->jam."</option>";
                     }
-                    echo"
-                    </select>";
+                    echo"</select>";
                     ?>
               </div>
 
@@ -143,9 +142,19 @@
                   <input type="text" class="form-control" name="tgl_selesai" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
               </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>Harga Movie</label>
                 <input type="text" placeholder="Masukkan Harga Movie" name="harga" id="harga" onkeyup="formatangka(this)" class="form-control" required/>
+              </div> -->
+              <div class="form-group">
+                <label>Harga Movie</label>
+                <select name='harga' id='' class='form-control select2' required >
+                  <option value="" disabled selected></option>
+                  <?php foreach ($harga as $key) { ?>
+                  <option value="<?php echo $key->harga;?>"><?php echo $key->harga; ?></option>
+                  <?php } ?>
+                </select>
+                
               </div>
 
               <!-- <div class="form-group">

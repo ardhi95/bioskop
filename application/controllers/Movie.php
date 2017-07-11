@@ -41,7 +41,7 @@ class Movie extends CI_Controller
 					'kuota'			=> 	$this->input->post('kuota'),
 					'tgl_mulai'		=> 	$this->input->post('tgl_mulai'),
 					'tgl_selesai'	=> 	$this->input->post('tgl_selesai'),
-					'harga'			=>	$this->M_movie->clean($this->input->post('harga')),
+					'harga'			=>	$this->input->post('harga'),
 					'status_tayang' 		=> 	"belum");
 
 
@@ -139,7 +139,7 @@ class Movie extends CI_Controller
 
 	public function TimeAdd(){
 
-		$data = array('id_jadwal'=> $this->CGenerate(),
+		$data = array('id_jam'=> '',
 					'id_bioskop'=> $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop'),
 					'jam'=> date("H:i", strtotime($this->input->post('jam')))
 					);
@@ -162,6 +162,76 @@ class Movie extends CI_Controller
            }
 
         redirect('Movie/tayang');
+	}
+
+	public function hargaAdd()
+	{
+		$kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+		$waktu = date("Y-m-d H:i:s");
+		$status = "0";
+		$data = array(
+			'id_harga' 	=> "",
+			'id_bioskop'=> $kode_bioskop,
+			'harga'		=> $this->M_movie->clean($this->input->post('harga')),
+			'waktu'		=> $waktu,
+			'status'	=> $status 
+			);	
+		$this->db->trans_start();
+		$this->db->insert('harga',$data);
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE) {
+            echo $this->session->set_flashdata('pemberitahuan', '<div class="alert alert-danger">
+		 		<a href="'. base_url('Movie/harga') .'" class="close" data-dismiss="alert">&times;</a>
+		  	    <strong>Gagal!</strong> Query Failed(Koneksi Buruk) !!
+			    </div>');
+           } else {
+           	echo $this->session->set_flashdata('pemberitahuan', '<div class="alert alert-success">
+		 		<a href="'. base_url('Movie/harga') .'" class="close" data-dismiss="alert">&times;</a>
+		  	    <strong>Berhasil!</strong> Data Ditambah
+			    </div>');
+           }
+
+        redirect('Movie/harga');
+	}
+
+	public function delHarga($id)
+	{
+		$update = array(
+				'status'=> '1'
+				);
+
+		$this->db->trans_start();
+		$this->db->update('harga',$update,array('id_harga'=>$id));
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE) {
+            echo $this->session->set_flashdata('pemberitahuan', '<div class="alert alert-danger">
+		 		<a href="'. base_url('Movie/tayang') .'" class="close" data-dismiss="alert">&times;</a>
+		  	    <strong>Gagal!</strong> Data Gagal Dirubah, Periksa Koneksi !!
+			    </div>');
+           } else {
+           	echo $this->session->set_flashdata('pemberitahuan', '<div class="alert alert-success">
+		 		<a href="'. base_url('Movie/tayang') .'" class="close" data-dismiss="alert">&times;</a>
+		  	    <strong>Success!</strong> Data Telah Berubah
+			    </div>');
+           }
+
+        redirect('Movie/harga');
+	}
+
+	public function harga()
+	{
+		$kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+		$data['harga'] = $this->M_movie->getHarga($kode_bioskop);
+		$this->load->view('Manager/harga',$data);
+	}
+
+	public function riwayatHarga()
+	{
+		$kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
+		$data['harga'] = $this->M_movie->getRiwayatHarga($kode_bioskop);
+		$this->load->view('Manager/riwayatHarga',$data);
 	}
 
 	private function CGenerate(){

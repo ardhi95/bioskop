@@ -23,6 +23,20 @@
             </span>
           </a>
         </li>
+        
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-file-video-o" aria-hidden="true"></i> <span>Harga</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?=base_url('Movie/harga')?>"><i class="fa fa-circle-o"></i> <span> Harga</span></a></li>
+            <li><a href="<?=base_url('Movie/riwayatHarga')?>"><i class="fa fa-circle-o"></i> Riwayat Harga</a></li>
+          </ul>
+        </li>
+
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-file-video-o" aria-hidden="true"></i> <span>Movie Management</span>

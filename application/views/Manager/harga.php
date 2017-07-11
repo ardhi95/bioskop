@@ -44,7 +44,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Jam Tayang
+        Harga Tiket
         <small>Add or Edit</small>
       </h1>
       <ol class="breadcrumb">
@@ -68,36 +68,23 @@
                 <thead>
                 <tr>
                   <th>Nomor</th>
-                  <th>Kode</th>
                   <th>Bioskop</th>
-                  <th>Jam</th>
-                  <th>Edit Jam</th>
+                  <th>Harga</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <?php
                 $index = 1;
-                foreach($jam->result() as $field){
+                foreach($harga as $field){
                 ?>
                 <tr>
                   <td align="center"><?=$index;?></td>
-                  <td><?=$field->id_jam?></td>
                   <td><?=$field->id_bioskop?></td>
-                  <td><?=$field->jam?></td>
-                  <td>
-                    <div class="bootstrap-timepicker">
-                      <div class="form-group">
-                        <?=form_open('Movie/TimeEdit?id='.$this->M_other->encrypt($field->id_jam));?>
-                          <div class="input-group">
-                            <input type="text" name="jam" value="<?=date("h:i", strtotime($field->jam))?>" class="form-control input-sm timepicker" style="width:60%" >
-
-                              <button type="submit" class="btn-info btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                          </div>
-                          <?=form_close();?>
-                          <!-- /.input group -->
-                      </div>
-                    </div>
+                  <td><?=$field->harga?></td>
+                  <td align="center">
+                    <a href="<?= base_url() ?>Movie/delHarga/<?= $field->id_harga ?>"><button type="button" class="btn btn-danger btn-xs"><span class='glyphicon glyphicon-trash'></span></button></a>
                   </td>
                 </tr>
                 <?php
@@ -116,22 +103,18 @@
 
           <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">Color & Time Picker</h3>
+              <h3 class="box-title">Tambah Harga Tiket</h3>
             </div>
             <div class="box-body">
 
               <!-- time Picker -->
               <div class="bootstrap-timepicker">
                 <div class="form-group">
-                <?=form_open('Movie/TimeAdd');?>
-                  <label>Time picker:</label>
+                <?=form_open('Movie/hargaAdd');?>
 
-                  <div class="input-group">
-                    <input type="text" name="jam" class="form-control timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
+                  <div class="form-group">
+                    <label>Harga Movie</label>
+                    <input type="text" placeholder="Masukkan Harga Movie" name="harga" id="harga" onkeyup="formatangka(this)" class="form-control" required/>
                   </div>
                   <br>
                    <div class="input-group">
@@ -210,6 +193,24 @@
     //bootstrap WYSIHTML5 - text editor
     $(".textarea").wysihtml5();
   });
+</script>
+<script type="text/javascript">
+  function formatangka(objek) {
+   a = objek.value;
+   b = a.replace(/[^\d]/g,"");
+   c = "";
+   panjang = b.length;
+   j = 0;
+   for (i = panjang; i > 0; i--) {
+     j = j + 1;
+     if (((j % 3) == 1) && (j != 1)) {
+       c = b.substr(i-1,1) + "." + c;
+     } else {
+       c = b.substr(i-1,1) + c;
+     }
+   }
+   objek.value = c;
+}
 </script>
 </body>
 </html>

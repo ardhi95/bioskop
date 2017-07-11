@@ -44,7 +44,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Jam Tayang
+        Harga Tiket
         <small>Add or Edit</small>
       </h1>
       <ol class="breadcrumb">
@@ -61,44 +61,29 @@
           <div class="box box-primary">
             <div class="box-header">
             <?=$this->session->flashdata('pemberitahuan')?>
-              <h3 class="box-title">List Jadwal </h3>
+              <h3 class="box-title">Riwayat Harga </h3>
             </div>
             <div class="box-body">
               <table id="tabeljadwal" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Nomor</th>
-                  <th>Kode</th>
                   <th>Bioskop</th>
-                  <th>Jam</th>
-                  <th>Edit Jam</th>
+                  <th>Harga</th>
+                  <th>Tanggal</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <?php
                 $index = 1;
-                foreach($jam->result() as $field){
+                foreach($harga as $field){
                 ?>
                 <tr>
                   <td align="center"><?=$index;?></td>
-                  <td><?=$field->id_jam?></td>
                   <td><?=$field->id_bioskop?></td>
-                  <td><?=$field->jam?></td>
-                  <td>
-                    <div class="bootstrap-timepicker">
-                      <div class="form-group">
-                        <?=form_open('Movie/TimeEdit?id='.$this->M_other->encrypt($field->id_jam));?>
-                          <div class="input-group">
-                            <input type="text" name="jam" value="<?=date("h:i", strtotime($field->jam))?>" class="form-control input-sm timepicker" style="width:60%" >
-
-                              <button type="submit" class="btn-info btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                          </div>
-                          <?=form_close();?>
-                          <!-- /.input group -->
-                      </div>
-                    </div>
-                  </td>
+                  <td><?=$field->harga?></td>
+                  <td><?=$field->waktu?></td>
                 </tr>
                 <?php
                 $index++;
@@ -108,48 +93,6 @@
             </div>
             <!-- /.box-body -->
           </div>
-        </div>
-        <!-- /.col (right) -->
-
-        <div class="row">
-        <div class="col-md-6">
-
-          <div class="box box-info">
-            <div class="box-header">
-              <h3 class="box-title">Color & Time Picker</h3>
-            </div>
-            <div class="box-body">
-
-              <!-- time Picker -->
-              <div class="bootstrap-timepicker">
-                <div class="form-group">
-                <?=form_open('Movie/TimeAdd');?>
-                  <label>Time picker:</label>
-
-                  <div class="input-group">
-                    <input type="text" name="jam" class="form-control timepicker">
-
-                    <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                  </div>
-                  <br>
-                   <div class="input-group">
-                    <button align="center" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Tambah </button>
-                   </div>
-                  <?=form_close();?>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
-              </div>
-
-                <!-- /.form group -->
-              </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
         </div>
       </div>
       <!-- /.row -->
@@ -186,15 +129,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?=base_url()?>Assets/Admin/dist/js/demo.js"></script>
 <!-- Page script -->
-<script>
-  $(function () {
 
-    //Timepicker
-    $(".timepicker").timepicker({
-      showInputs: false
-    });
-  });
-</script>
 <script>
   $(function () {
     $('#tabeljadwal').DataTable({

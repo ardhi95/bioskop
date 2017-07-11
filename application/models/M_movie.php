@@ -117,4 +117,17 @@ class M_movie extends CI_Model {
    		$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
    		return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
    	}
+
+   	public function getHarga($condition)
+   	{
+   		$query = $this->db->get_where('harga', array('id_bioskop' => $condition,'status' => '0'))->result();
+   		return $query;
+   	}
+   	public function getRiwayatHarga($condition)
+   	{
+   		$this->db->where(array('id_bioskop' => $condition,'status' => '1'));
+   		$this->db->order_by("waktu", "asc");
+   		$query = $this->db->get('harga')->result();
+   		return $query;
+   	}
 }

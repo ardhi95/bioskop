@@ -76,7 +76,7 @@ class Manager extends CI_Controller
         }else{
 
         $kode_bioskop = $this->M_movie->first_value_where('id_bioskop','id_manager',$this->session->userdata('kd_Manager'),'bioskop');
-
+        $data['harga'] = $this->M_movie->getHarga($kode_bioskop);
         $data['id_bioskop']= $kode_bioskop;
         $kondisi = array('id_bioskop' => $kode_bioskop);
         $data['jadwal'] = $this->M_movie->edit_dataJam($kondisi,'jam_pemutaran');
